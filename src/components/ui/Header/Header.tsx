@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
-import { enableWallet } from '../../../ethereum/web3';
+import { useDispatch } from '../../../store/provider';
+import { types } from '../../../store/types';
 
 import { routes } from '../../../routes';
 import Button from '../Button/Button';
@@ -16,6 +17,7 @@ interface HeaderProps {};
 
 const Header: React.FC<HeaderProps> = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [activeRoute, setActiveRoute] = useState<number>(null);
   
   const links: {[p: string]: string | number}[] = [
@@ -54,7 +56,7 @@ const Header: React.FC<HeaderProps> = () => {
         label="Connect Wallet"
         height="50px"
         width="150px"
-        onClick={() => enableWallet()}
+        onClick={() => dispatch({ type: types.ui.handleWalletModal, payload: true})}
       />
     </HeaderContainer>
   )

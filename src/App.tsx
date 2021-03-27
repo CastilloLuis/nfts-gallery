@@ -12,6 +12,7 @@ import GlobalStyle from './styles/global';
 import Home from './pages/Home/Home';
 import Gallery from './pages/Gallery/Gallery';
 import FunZone from './pages/FunZone/FunZone';
+import StoreProvider from './store/provider';
 
 interface AppProps {};
 
@@ -19,14 +20,16 @@ const App: React.FC<AppProps> = () => {
   return (
     <>
       <StyledTheme>
-        <Router>
-          <Switch>
-            <Route path={routes.HOME}><Home /></Route>
-            <Route path={routes.GALLERY}><Gallery /></Route>
-            <Route path={routes.FUN_ZONE}><FunZone /></Route>
-            <Route path='/'><Home /></Route>
-          </Switch>
-        </Router>
+        <StoreProvider>
+          <Router>
+            <Switch>
+              <Route path={routes.HOME}><Home /></Route>
+              <Route path={routes.GALLERY}><Gallery /></Route>
+              <Route path={routes.FUN_ZONE}><FunZone /></Route>
+              <Route path='/'><Home /></Route>
+            </Switch>
+          </Router>
+        </StoreProvider>
       </StyledTheme>
       <GlobalStyle />
     </>
