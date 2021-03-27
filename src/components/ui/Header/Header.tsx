@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
+import { enableWallet } from '../../../ethereum/web3';
+
 import { routes } from '../../../routes';
 import Button from '../Button/Button';
 import { 
@@ -52,7 +54,7 @@ const Header: React.FC<HeaderProps> = () => {
         label="Connect Wallet"
         height="50px"
         width="150px"
-        onClick={() => {}}
+        onClick={() => enableWallet()}
       />
     </HeaderContainer>
   )
