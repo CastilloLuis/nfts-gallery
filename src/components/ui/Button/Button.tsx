@@ -12,13 +12,14 @@ export interface ButtonProps {
   width?: string;
   height?: string;
   outline?: boolean;
+  dark?: boolean;
   onClick: () => void;
 }
 
 const Button: React.FunctionComponent<ButtonProps> = (props) => {
   return (
     <ButtonContainer {...props}>
-      <ButtonText>{props.label}</ButtonText>
+      <ButtonText dark={props.dark}>{props.label}</ButtonText>
     </ButtonContainer>
   )
 }

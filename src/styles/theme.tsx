@@ -6,7 +6,8 @@ const styleTheme = {
     primary: '#080C11',
     white: '#FFF',
     black: '#000',
-    gray1: '#AAB8C1'
+    gray1: '#AAB8C1',
+    gray2: 'rgb(53, 56, 64)'
   },
   fonts: {
     light: 'font-weight: 300;',

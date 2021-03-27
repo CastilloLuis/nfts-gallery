@@ -7,10 +7,8 @@ export const FooterContainer = styled.div`
   height: 150px;
   padding: 15px;
   box-sizing: border-box;
-
-  position: fixed;
-  bottom: 0px;
-
+  position: relative;
+  border-top: 1px solid #222;
   background-color: ${({ theme: { colors } }) => `${colors.primary}`};
 `;
 

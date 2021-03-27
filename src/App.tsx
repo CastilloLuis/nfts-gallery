@@ -24,6 +24,7 @@ const App: React.FC<AppProps> = () => {
             <Route path={routes.HOME}><Home /></Route>
             <Route path={routes.GALLERY}><Gallery /></Route>
             <Route path={routes.FUN_ZONE}><FunZone /></Route>
+            <Route path='/'><Home /></Route>
           </Switch>
         </Router>
       </StyledTheme>
