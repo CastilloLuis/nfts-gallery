@@ -6,7 +6,6 @@ export const HeaderContainer = styled.div`
   width: 100%;
   height: 80px;
   background-color: ${({ theme: { colors } }) => `${colors.primary}`};
-  box-shadow: 0 7px 29px 0 rgba(0, 0, 0, 0.07);
   padding: 0 15px;
   box-sizing: border-box;
 `;
@@ -16,7 +15,7 @@ export const NavbarLinkContainer = styled.div`
 `;
 
 export const HeaderText = styled.span`
-  oapcity: 0;
+  opacity: 0;
 `;
 
 export const StyledLink = styled.div<{active: boolean}>`

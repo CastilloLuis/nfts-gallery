@@ -1,5 +1,5 @@
 export const routes: {[p: string]: string} = {
-  HOME: '/',
+  HOME: '/home',
   GALLERY: '/gallery',
   FUN_ZONE: '/fun-zone'
 };

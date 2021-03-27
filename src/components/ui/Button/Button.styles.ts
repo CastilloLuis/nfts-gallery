@@ -8,22 +8,26 @@ export const ButtonContainer = styled.button<ButtonProps>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   border-radius: 15px;
-  &:hover {
-    box-shadow: none;
-    cursor: pointer;
-    opacity: 0.8;
-  }
   box-sizing: border-box;
-
+  transition: all 0.1s ease-in-out;
+  span {
+    color: ${({ dark, theme }) => dark ? theme.colors.black : theme.colors.white};
+  }
   ${
     props => props.outline && `
-      border: 1px solid #FFF !important;
+      border: 1px solid ${props.dark ? '#000' : '#FFF'} !important;
       background: transparent;
+      &:hover {
+        cursor: pointer;
+        background: ${props.dark ? props.theme.colors.black : props.theme.colors.white};
+        span {
+          color: ${props.dark ? props.theme.colors.white : props.theme.colors.black};
+        }
+      }
     `
   }
 `
 
-export const ButtonText = styled.span`
-  color: ${({ theme }) => theme.colors.white};
+export const ButtonText = styled.span<{dark: boolean}>`
   font-size: 14px;
 `

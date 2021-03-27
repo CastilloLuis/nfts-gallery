@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Layout from '../../components/ui/Layout/Layout';
 import { HomeContainer } from './Home.styles';
+import Layout from '../../components/ui/Layout/Layout';
 
 const Home: React.FC<{}> = () => {
   return (
