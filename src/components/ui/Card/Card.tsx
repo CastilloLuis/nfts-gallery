@@ -53,8 +53,7 @@ const Card: React.FC<CardProps> = ({
           <TipButtonContainer>
             <Button
               outline
-              dark
-              label="Tip the Artist"
+              label="Mint"
               height="30px"
               width="120px"
               onClick={() => {}}

@@ -13,6 +13,11 @@ export const FunZoneContainer = styled.div`
   padding-right: 30px;
 `;
 
+export const FunZoneModalLabel = styled.label`
+  width: 210px;
+  font-size: 12px;
+`
+
 export const FunZoneItemContainer = styled.div`
   box-sizing: border-box;
   margin: 20px;
@@ -35,5 +40,6 @@ export const FunZoneInput = styled.input`
   font-size: 15px;
   border: none;
   outline: none;
-  margin-left: 15px
+  margin-left: 15px;
+  ${props => props.disabled && `background-color: transparent !important;`}
 `;

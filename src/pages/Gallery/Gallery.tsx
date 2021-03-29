@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Card from '../../components/ui/Card/Card';
 import Layout from '../../components/ui/Layout/Layout';
-import { GalleryContainer, GalleryItemContainer } from './Gallery.styles';
+import { GalleryContainer, GalleryItemContainer, ButtonContainer, FeesLabel } from './Gallery.styles';
 import { INFT } from '../../entities/nft.entity';
 import Modal from '../../components/ui/Modal/Modal';
 import Button from '../../components/ui/Button/Button';
@@ -49,14 +49,17 @@ const Gallery: React.FC<GalleryProps> = () => {
           <img 
             src={selectedNFT.image}   
           />
-        <Button
-          outline
-          dark
-          label="Buy Now"
-          height="50px"
-          width="150px"
-          onClick={() => {}}
-        />
+          <ButtonContainer>
+            <Button
+              outline
+              dark
+              label="Mint Now"
+              height="50px"
+              width="150px"
+              onClick={() => {}}
+            />
+            <FeesLabel>Minting cost 0.5 ETH + gas fees</FeesLabel>
+          </ButtonContainer>
         </Modal>
       )}
     </Layout>

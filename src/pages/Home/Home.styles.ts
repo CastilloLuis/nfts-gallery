@@ -10,12 +10,14 @@ export const HomeLetter = styled.div`
   padding: 25px 50px;
   color: #fff;
   font-family: 'Roboto';
-`
+`;
+
 export const ArtistIcon = styled.div`
-  ${flex('center', 'center')};
+  ${flex('flex-start', 'center')};
   width: 100%;
-  margin: 10px;
   img {
-    width: 150px;
+    width: 120px;
+    margin-right: 15px;
   }
-`
+  span { line-height: 25px; }
+`;

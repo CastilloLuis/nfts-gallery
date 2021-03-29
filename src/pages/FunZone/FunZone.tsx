@@ -8,16 +8,18 @@ import {
   FunZoneContainer,
   FunZoneInputContainer,
   FunZoneInput,
-  FunZoneItemContainer
+  FunZoneItemContainer,
+  FunZoneModalLabel
 } from './FunZone.styles';
 import { nftTest } from '../../pages/Gallery/Gallery';
+import { ButtonContainer, FeesLabel } from '../../pages/Gallery/Gallery.styles';
 
 interface FunZone {};
 
 const FunZone: React.FC<FunZone> = () => {
 
-
   const [tipArtist, setTipArtist] = useState<boolean>(false);
+  const [tipValue, setTipValue] = useState<number | string>(0);
 
   return (
     <Layout>
@@ -41,21 +43,33 @@ const FunZone: React.FC<FunZone> = () => {
         }
         {tipArtist && (
           <Modal
-            title="Tip the Artist"
+            title="Mint"
+            height="350px"
             onClose={() => setTipArtist(false)}
           >
+
+          <FunZoneModalLabel>Mint cost</FunZoneModalLabel>
           <FunZoneInputContainer>
             <i className="fab fa-ethereum"></i>
-            <FunZoneInput placeholder="Enter your tip amount" />
+            <FunZoneInput disabled value="0.01 ETH" />
           </FunZoneInputContainer>
-          <Button
-            outline
-            dark
-            label="Buy Now"
-            height="50px"
-            width="150px"
-            onClick={() => setTipArtist(false)}
-          />
+          <FunZoneModalLabel>Tip to the Artist</FunZoneModalLabel>
+          <FunZoneInputContainer>
+            <i className="fab fa-ethereum"></i>
+            <FunZoneInput value={tipValue} onChange={e => setTipValue(e.target.value)} />
+            <span>ETH</span>
+          </FunZoneInputContainer>
+          <ButtonContainer>
+            <Button
+              outline
+              dark
+              label="Mint Now"
+              height="50px"
+              width="150px"
+              onClick={() => setTipArtist(false)}
+            />
+            <FeesLabel>The highest tipper (cumulatively) will receive a rare dick NFT after the collection minting finishes</FeesLabel>
+          </ButtonContainer>
           </Modal>
         )}
       </FunZoneContainer>

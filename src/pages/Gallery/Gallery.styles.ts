@@ -17,3 +17,12 @@ export const GalleryItemContainer = styled.div`
   box-sizing: border-box;
   margin: 20px;
 `;
+
+export const ButtonContainer = styled.div`
+  ${flex('center', 'center', 'column')};
+  text-align: center;
+`
+
+export const FeesLabel = styled.span`
+  font-size: 12px; margin-top: 10px;
+`;
