@@ -16,6 +16,7 @@ export const NavbarLinkContainer = styled.div`
 
 export const HeaderText = styled.span`
   opacity: 0;
+  width: 150px;
 `;
 
 export const StyledLink = styled.div<{active: boolean}>`
