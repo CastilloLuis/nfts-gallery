@@ -11,32 +11,48 @@ import {
   FunZoneItemContainer,
   FunZoneModalLabel
 } from './FunZone.styles';
-import { nftTest } from '../../pages/Gallery/Gallery';
-import { ButtonContainer, FeesLabel } from '../../pages/Gallery/Gallery.styles';
+import { ButtonContainer, FeesLabel, LoadingText } from '../../pages/Gallery/Gallery.styles';
+import { generateNFT } from '../../utils/utils';
+import { INFT } from '../../entities/nft.entity';
+import { useStore } from '../../store/provider';
+import { NFT_FUN_ZONE_QTY } from '../../../nfts-quantities';
 
 interface FunZone {};
 
 const FunZone: React.FC<FunZone> = () => {
 
+  const { ui: { contractLoaded } } = useStore();
+  const [selectedNFT, setSelectedNFT] = useState<INFT>(null);
   const [tipArtist, setTipArtist] = useState<boolean>(false);
   const [tipValue, setTipValue] = useState<number | string>(0);
+
+  const handleCardClick = (event: EventTarget, nft: INFT): void => {
+    const className = (event as HTMLElement).className;
+    if (!className.includes('image')) return setTipArtist(true);
+    setSelectedNFT(nft);
+  }
+
+  if (!contractLoaded) {
+    return <Layout>
+      <LoadingText>Loading...</LoadingText>
+    </Layout>
+  }
 
   return (
     <Layout>
       <FunZoneContainer>
 
         {
-          [1,2,3,4,5,6,7,8,9,0,33,4,4,].map((_, idx) => (
+           generateNFT(NFT_FUN_ZONE_QTY).map((nft, idx) => (
             <FunZoneItemContainer
               key={idx}
-              onClick={() => setTipArtist(true)}
+              onClick={e => handleCardClick(e.target, nft)}
             >
               <Card
                 showTip
-                image={nftTest.image}
-                title={nftTest.title}
-                totalLeft={nftTest.totalLeft}
-                price={nftTest.price}
+                image={nft.fullImage}
+                title={nft.name}
+                price={nft.price}
               />
             </FunZoneItemContainer>
           ))
@@ -70,6 +86,21 @@ const FunZone: React.FC<FunZone> = () => {
             />
             <FeesLabel>The highest tipper (cumulatively) will receive a rare dick NFT after the collection minting finishes</FeesLabel>
           </ButtonContainer>
+          </Modal>
+        )}
+        {selectedNFT && (
+          <Modal
+            width="800px"
+            height="auto"
+            title={selectedNFT.name}
+            onClose={() => setSelectedNFT(null)}
+          >
+            <img 
+              src={selectedNFT.preview}
+              style={{
+                width: '80%'
+              }}
+            />
           </Modal>
         )}
       </FunZoneContainer>

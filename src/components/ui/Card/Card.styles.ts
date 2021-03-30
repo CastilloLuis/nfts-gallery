@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { flex } from '../../../styles/mixins';
 
 export const CardContainer = styled.div<{showTip: boolean}>`
-  width: 280px;
-  height: ${props => props.showTip ? '380px' : '320px'};
+  width: 320px;
+  height: ${props => props.showTip ? '550px' : '550px'};
   background: background-color: ${({ theme: { colors } }) => `${colors.primary}`};
   border-radius: 5px;
   box-shadow: 0 7px 29px 0 rgba(0, 0, 0, 0.05);
@@ -31,7 +31,7 @@ export const NFTInfoContainer = styled.div`
 
 export const NFTImageContainer = styled.div`
   ${flex('center', 'center')};
-  height: 225px;
+  height: 400px;
   img {
     max-width: 100%;
     max-height: 100%;

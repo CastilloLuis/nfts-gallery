@@ -26,3 +26,10 @@ export const ButtonContainer = styled.div`
 export const FeesLabel = styled.span`
   font-size: 12px; margin-top: 10px;
 `;
+
+export const LoadingText = styled.div`
+  width: 100%;
+  text-align: center;
+  color: #FFF;
+  margin: 50px;
+`;

@@ -9,8 +9,6 @@ export function getWeb3(): Promise<any> {
   })
 }
 
-export function enableWallet(): void {
-  if (!window.ethereum.isConnected()) {
-    window.ethereum.enable();
-  }
+export async function enableWallet(): Promise<void> {
+  return await window.ethereum.request({ method: 'eth_requestAccounts' });
 }

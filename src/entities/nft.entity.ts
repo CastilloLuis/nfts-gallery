@@ -1,6 +1,7 @@
 export interface INFT {
-  title?: string;
-  image?: string;
-  totalLeft?: any;
-  price?: any;
+  kind: number;
+  name: string;
+  preview: string;
+  fullImage: string;
+  price?: string;
 };
