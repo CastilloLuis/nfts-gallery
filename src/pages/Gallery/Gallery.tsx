@@ -1,38 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Card from '../../components/ui/Card/Card';
 import Layout from '../../components/ui/Layout/Layout';
-import { GalleryContainer, GalleryItemContainer, ButtonContainer, FeesLabel } from './Gallery.styles';
+import { GalleryContainer, GalleryItemContainer, ButtonContainer, FeesLabel, LoadingText } from './Gallery.styles';
 import { INFT } from '../../entities/nft.entity';
 import Modal from '../../components/ui/Modal/Modal';
 import Button from '../../components/ui/Button/Button';
+import { generateNFT } from '../../utils/utils';
+import { useStore } from '../../store/provider';
+import { NFT_GALLERY_QTY } from '../../../nfts-quantities';
 
 interface GalleryProps {};
 
-export const nftTest = {
-  image: 'https://lh3.googleusercontent.com/x7RgiE0ReCqNZUbNUtbIT8VwCPBoOYmA38BDm3Ou8b-WDQiWxXhZjUq2L0n5DYE5k4tMmfjBxmxjjXoEt4ad-43R8Cb39HqTWFVhhQ=s260',
-  title: 'DogePunk Animate #7889',
-  totalLeft: '3 out of 5',
-  price: 0.000453
-}
 
 const Gallery: React.FC<GalleryProps> = () => {
+
+  const { ui: { contractLoaded } } = useStore();
   const [selectedNFT, setSelectedNFT] = useState<INFT>(null);
+
+  if (!contractLoaded) {
+    return <Layout>
+      <LoadingText>Loading...</LoadingText>
+    </Layout>
+  }
 
   return (
     <Layout>
       <GalleryContainer>
         {
-          [1,2,3,4,5,6,7,8,9,0,33,4,4,].map((_, idx) => (
+          generateNFT(NFT_GALLERY_QTY, true).map((nft, idx) => (
             <GalleryItemContainer
               key={idx}
-              onClick={() => setSelectedNFT(nftTest)}
+              onClick={() => setSelectedNFT(nft)}
             >
               <Card
-                image={nftTest.image}
-                title={nftTest.title}
-                totalLeft={nftTest.totalLeft}
-                price={nftTest.price}
+                isGallery
+                image={nft.fullImage}
+                title={nft.name}
+                kind={nft.kind}
               />
             </GalleryItemContainer>
           ))
@@ -41,13 +46,16 @@ const Gallery: React.FC<GalleryProps> = () => {
 
       {selectedNFT && (
         <Modal
-          width="700px"
-          height="600px"
-          title={selectedNFT.title}
+          width="800px"
+          height="800px"
+          title={selectedNFT.name}
           onClose={() => setSelectedNFT(null)}
         >
           <img 
-            src={selectedNFT.image}   
+            src={selectedNFT.preview}
+            style={{
+              width: '80%'
+            }}
           />
           <ButtonContainer>
             <Button

@@ -12,6 +12,7 @@ import {
   StyledLink,
   HeaderText
 } from './Header.styles';
+import ConnectedLabel from '../ConnectedLabel/ConnectedLabel';
 
 interface HeaderProps {};
 
