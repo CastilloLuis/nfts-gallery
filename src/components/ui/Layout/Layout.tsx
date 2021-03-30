@@ -1,43 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { useDispatch, useStore } from '../../../store/provider';
 import { types } from '../../../store/types';
-import { getWeb3 } from '../../../ethereum/web3';
-import minterContractProvider from '../../../providers/minter.provider';
+import { isMetaMaskInstalled } from '../../../ethereum/metamask';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Modal from '../Modal/Modal';
 
-import { LayoutContainer, WalletProviderBox } from './Layout.styles';
+import { LayoutContainer, WalletProviderBox, InvalidWalletExtension} from './Layout.styles';
 import MetamaskIcon from '../../../assets/metamask.png';
+import { enableWallet } from '../../../ethereum/web3';
+import Spinner from '../../../components/animations/Spinner';
 
 interface LayoutProps {
   children: any;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [isLoadingWallet, setIsLoadingWallet] = useState<boolean>(false);
   const { ui: { walletModal } } = useStore();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    handleDeployedSmartContract()
-  }, [])
-
-  const handleWalletConnection = async(): Promise<void> => {
-    window.web3 = await getWeb3();
-    handleDeployedSmartContract();
-  }
-
-  const handleDeployedSmartContract = async(): Promise<void> => {
-    console.log(window.web3.currentProvider)
-    const minter = await minterContractProvider(window.web3.currentProvider);
-    window.contracts = {
-      ...window.contracts,
-      minter
-    };
-    dispatch({ type: types.ui.contractLoaded, payload: true });
-    dispatch({ type: types.ui.handleWalletModal, payload: false});
+  const handleWalletConnection = async () => {
+    if (isLoadingWallet) return;
+    setIsLoadingWallet(true);
+    try {
+      const accounts = await enableWallet();
+      dispatch({ type: types.wallet.setCurrentAcount, payload: accounts[0] || null})
+      setIsLoadingWallet(false);
+      dispatch({ type: types.ui.handleWalletModal, payload: false})
+    } catch (error) {
+      console.error(error);
+      setIsLoadingWallet(false);
+    }
   }
 
   return (
@@ -51,13 +47,28 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           title="Connect Wallet"
           onClose={() => dispatch({ type: types.ui.handleWalletModal, payload: false})}
         >
-          <WalletProviderBox onClick={handleWalletConnection}>
-            <div>
-              <img src={MetamaskIcon} alt="Metamask Provider Icon" />
-              <span>Metamask</span>
-            </div>
-            <i className="fas fa-arrow-right"></i>
-          </WalletProviderBox>
+          {
+            isMetaMaskInstalled() ? (
+              <WalletProviderBox onClick={handleWalletConnection}>
+                <div>
+                  <img src={MetamaskIcon} alt="Metamask Provider Icon" />
+                  <span>Metamask</span>
+                </div>
+                {
+                  isLoadingWallet ? (
+                    <div style={{marginTop: '20px'}}><Spinner /></div>
+                  ) : (
+                    <i className="fas fa-arrow-right"></i>
+                  )
+                }
+              </WalletProviderBox>
+            ) : (
+              <InvalidWalletExtension>
+                <img src={MetamaskIcon} alt="Metamask Provider Icon" />
+                Looks like MetaMask extension is not installed in your browser
+              </InvalidWalletExtension>
+            )
+          }
         </Modal>
       )}
       <Footer />

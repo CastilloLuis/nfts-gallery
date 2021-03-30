@@ -6,6 +6,16 @@ export const LayoutContainer = styled.div`
   height: 100%;
 `;
 
+export const InvalidWalletExtension = styled.div`
+  ${flex('center', 'center', 'column')};
+  text-align: center;
+  img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+  }
+`
+
 export const WalletProviderBox = styled.div`
   ${flex('center', 'space-between')};
   width: 100%;

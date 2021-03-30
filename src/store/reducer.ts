@@ -6,6 +6,9 @@ const initialStore = {
     walletModal: {
       open: false
     }
+  },
+  wallet: {
+    currentAccount: null
   }
 }
 
@@ -25,6 +28,13 @@ const storeReducer = (state, action): void => {
         ui: {
           ...state.ui,
           contractLoaded: action.payload
+        }
+      }
+    case types.wallet.setCurrentAcount:
+      return {
+        ...state,
+        wallet: {
+          currentAccount: action.payload
         }
       }
     default:
