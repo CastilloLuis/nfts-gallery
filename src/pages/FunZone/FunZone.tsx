@@ -32,7 +32,7 @@ const FunZone: React.FC<FunZone> = () => {
   const [tipKind, setTipKind] = useState<number>(null);
   const [tipArtist, setTipArtist] = useState<boolean>(false);
 
-  const [tipValue, setTipValue] = useState<string>('');
+  const [tipValue, setTipValue] = useState<string>('0');
   const [totalSold, setTotalSold] = useState<string>('0');
 
   useEffect(() => {
@@ -124,7 +124,7 @@ const FunZone: React.FC<FunZone> = () => {
             <FunZoneModalLabel>Tip to the Artist</FunZoneModalLabel>
             <FunZoneInputContainer  error={isNaN(Number(tipValue)) && tipValue.length > 0}>
               <i className="fab fa-ethereum"></i>
-              <FunZoneInput type="text" value={tipValue} placeholder='0' onChange={e => setTipValue(e.target.value.replace('-', '').replace('+', ''))} />
+              <FunZoneInput type="text" value={tipValue} onChange={e => setTipValue(e.target.value.replace('-', '').replace('+', ''))} />
               <span>ETH</span>
             </FunZoneInputContainer>
             <ButtonContainer>
@@ -151,7 +151,7 @@ const FunZone: React.FC<FunZone> = () => {
             <img 
               src={selectedNFT.preview}
               style={{
-                width: '80%'
+                width: '60%'
               }}
             />
           </Modal>

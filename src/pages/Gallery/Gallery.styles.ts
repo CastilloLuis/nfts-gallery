@@ -8,7 +8,7 @@ export const GalleryContainer = styled.div`
   box-sizing: border-box;
 
   display: grid;  
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   padding-left: 20px;
   padding-right: 30px;
 `;
@@ -31,5 +31,6 @@ export const LoadingText = styled.div`
   width: 100%;
   text-align: center;
   color: #FFF;
-  margin: 50px;
+  box-sizing: border-box;
+  padding: 50px;
 `;

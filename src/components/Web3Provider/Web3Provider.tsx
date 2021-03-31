@@ -19,8 +19,12 @@ const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
   }, [])
 
   const initWeb3 = async(): Promise<void> => {
-    window.web3 = await getWeb3();
-    handleDeployedSmartContract();
+    try {
+      window.web3 = await getWeb3();
+      handleDeployedSmartContract();
+    } catch (e) {
+      dispatch({ type: types.ui.contractLoaded, payload: true });
+    }
   }
 
   const handleDeployedSmartContract = async(): Promise<void> => {

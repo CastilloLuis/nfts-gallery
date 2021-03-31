@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = () => {
       </NavbarLinkContainer>
       {
         currentAccount ? (
-          <ConnectedLabel />
+          <ConnectedLabel account={currentAccount}/>
         ) : (
           <Button
             outline

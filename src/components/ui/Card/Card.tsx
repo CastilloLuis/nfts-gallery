@@ -15,6 +15,7 @@ import {
   TipButtonContainer
 } from './Card.styles';
 import { MAX_GALLERY_ITEM_PER_NFT } from '../../../constants/mint';
+import { isMetaMaskInstalled } from '../../../ethereum/metamask';
 
 interface CardProps {
   kind?: number;
@@ -65,23 +66,27 @@ const Card: React.FC<CardProps> = ({
       <NFTInfoContainer>
         <NFTInfo>
           <NFTInfoTitle>{title}</NFTInfoTitle>
-          {isGallery && (
+          {isGallery && isMetaMaskInstalled() && (
             <NFTInfoTotalLeft>({MAX_GALLERY_ITEM_PER_NFT-parseInt(nftKindsNumbers)} out of {MAX_GALLERY_ITEM_PER_NFT})</NFTInfoTotalLeft>
           )}
         </NFTInfo>
-        <NFTPrice>
-          <NFTPriceTitle>Price</NFTPriceTitle>
-          <NFTPriceInfo>
-            <i className="fab fa-ethereum"></i>
-            {
-              price ? (
-                <span>{price}</span>
-              ) : (
-                <span>{etherPrice || 'Loading...'}</span>
-              )
-            }
-          </NFTPriceInfo>
-        </NFTPrice>
+        {
+          isMetaMaskInstalled() && (
+            <NFTPrice>
+              <NFTPriceTitle>Price</NFTPriceTitle>
+              <NFTPriceInfo>
+                <i className="fab fa-ethereum"></i>
+                {
+                  price ? (
+                    <span>{price}</span>
+                  ) : (
+                    <span>{etherPrice || 'Loading...'}</span>
+                  )
+                }
+              </NFTPriceInfo>
+            </NFTPrice>
+          )
+        }
       </NFTInfoContainer>
       {
         showTip && (

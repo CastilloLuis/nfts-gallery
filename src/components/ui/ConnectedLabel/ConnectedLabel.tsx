@@ -16,11 +16,11 @@ const ConnectedLabelContainer = styled.div`
   }
 `
 
-const ConnectedLabel: React.FC<{}> = () => {
+const ConnectedLabel: React.FC<{account: string}> = ({ account }) => {
   return (
     <ConnectedLabelContainer>
       <div></div>
-      <span>Connected to MetaMask</span>
+      <span>Connected to {account || ''}</span>
     </ConnectedLabelContainer>
   )
 }

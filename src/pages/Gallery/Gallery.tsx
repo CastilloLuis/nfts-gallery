@@ -72,14 +72,14 @@ const Gallery: React.FC<GalleryProps> = () => {
       {selectedNFT && (
         <Modal
           width="800px"
-          height="800px"
+          height="700px"
           title={selectedNFT.name}
           onClose={() => setSelectedNFT(null)}
         >
           <img 
             src={selectedNFT.preview}
             style={{
-              width: '80%'
+              width: '60%'
             }}
           />
           <ButtonContainer>
