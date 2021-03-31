@@ -18,7 +18,7 @@ export interface ButtonProps {
 
 const Button: React.FunctionComponent<ButtonProps> = (props) => {
   return (
-    <ButtonContainer {...props}>
+    <ButtonContainer {...props} disabled={props.disabled}>
       <ButtonText dark={props.dark}>{props.label}</ButtonText>
     </ButtonContainer>
   )

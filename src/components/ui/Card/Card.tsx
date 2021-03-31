@@ -14,6 +14,7 @@ import {
   NFTPriceInfo,
   TipButtonContainer
 } from './Card.styles';
+import { MAX_GALLERY_ITEM_PER_NFT } from '../../../constants/mint';
 
 interface CardProps {
   kind?: number;
@@ -22,11 +23,13 @@ interface CardProps {
   showTip?: boolean;
   price?: string;
   isGallery?: boolean;
+  onClick?: (etherPrice?: string) => void;
 };
 
 const Card: React.FC<CardProps> = ({
   title, image, kind,
-  showTip, price, isGallery
+  showTip, price, isGallery,
+  onClick
 }) => {
 
   const [etherPrice, setPrice] = useState<string>(null);
@@ -50,7 +53,7 @@ const Card: React.FC<CardProps> = ({
   }
 
   return (
-    <CardContainer showTip={showTip}>
+    <CardContainer showTip={showTip} onClick={() => onClick && onClick(etherPrice)}>
       <NFTImageContainer className="image-container">
         <img 
           src={image}
@@ -63,7 +66,7 @@ const Card: React.FC<CardProps> = ({
         <NFTInfo>
           <NFTInfoTitle>{title}</NFTInfoTitle>
           {isGallery && (
-            <NFTInfoTotalLeft>({nftKindsNumbers})</NFTInfoTotalLeft>
+            <NFTInfoTotalLeft>({MAX_GALLERY_ITEM_PER_NFT-parseInt(nftKindsNumbers)} out of {MAX_GALLERY_ITEM_PER_NFT})</NFTInfoTotalLeft>
           )}
         </NFTInfo>
         <NFTPrice>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
-import { useDispatch } from '../../../store/provider';
+import { useDispatch, useStore } from '../../../store/provider';
 import { types } from '../../../store/types';
 
 import { routes } from '../../../routes';
@@ -19,6 +19,8 @@ interface HeaderProps {};
 const Header: React.FC<HeaderProps> = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const { wallet: { currentAccount } } = useStore();
   const [activeRoute, setActiveRoute] = useState<number>(null);
   
   const links: {[p: string]: string | number}[] = [
@@ -52,13 +54,19 @@ const Header: React.FC<HeaderProps> = () => {
           ))
         }
       </NavbarLinkContainer>
-      <Button
-        outline
-        label="Connect Wallet"
-        height="50px"
-        width="150px"
-        onClick={() => dispatch({ type: types.ui.handleWalletModal, payload: true})}
-      />
+      {
+        currentAccount ? (
+          <ConnectedLabel />
+        ) : (
+          <Button
+            outline
+            label="Connect Wallet"
+            height="50px"
+            width="150px"
+            onClick={() => dispatch({ type: types.ui.handleWalletModal, payload: true})}
+          />
+        )
+      }
     </HeaderContainer>
   )
 }
