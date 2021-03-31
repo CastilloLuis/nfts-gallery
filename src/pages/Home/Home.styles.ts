@@ -7,7 +7,7 @@ export const HomeContainer = styled.div`
 `;
 
 export const HomeLetter = styled.div`
-  height: 75vh;
+  height: 100vh;
   padding: 25px 50px;
   color: #fff;
   font-family: 'Roboto';
