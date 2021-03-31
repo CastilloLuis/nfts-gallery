@@ -20,7 +20,7 @@ const ConnectedLabel: React.FC<{}> = () => {
   return (
     <ConnectedLabelContainer>
       <div></div>
-      <span>Connected to Metamask</span>
+      <span>Connected to MetaMask</span>
     </ConnectedLabelContainer>
   )
 }
