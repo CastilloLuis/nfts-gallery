@@ -23,14 +23,14 @@ export const FunZoneItemContainer = styled.div`
   margin: 20px;
 `
 
-export const FunZoneInputContainer = styled.div`
+export const FunZoneInputContainer = styled.div<{error?: boolean}>`
   ${flex('center', 'center')};
   width: 210px;
   padding: 0 15px;
   border-radius: 5px;
   box-sizing: border-box;
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(229, 232, 235);
+  border: 1px solid ${props => props.error ? 'red' : 'rgb(229, 232, 235)'};
   color: rgba(14, 14, 14, 0.75);
 `
 
@@ -42,4 +42,14 @@ export const FunZoneInput = styled.input`
   outline: none;
   margin-left: 15px;
   ${props => props.disabled && `background-color: transparent !important;`}
+`;
+
+export const TotalNFTSoldContainer = styled.div`
+  ${flex('center', 'center', 'column')};
+  width: 100%;
+  color: #FFFFFF;
+  margin-top: 25px;
+  span {
+    font-size: 30px;
+  }
 `;
