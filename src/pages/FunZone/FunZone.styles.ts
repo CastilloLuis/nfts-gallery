@@ -8,7 +8,7 @@ export const FunZoneContainer = styled.div`
   box-sizing: border-box;
 
   display: grid;  
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   padding-left: 20px;
   padding-right: 30px;
 `;

@@ -27,6 +27,11 @@ export const FeesLabel = styled.span`
   font-size: 12px; margin-top: 10px;
 `;
 
+export const TipButtons = styled.div`
+  ${flex('center', 'center')};
+  div { width: 20px; }
+`
+
 export const LoadingText = styled.div`
   width: 100%;
   text-align: center;

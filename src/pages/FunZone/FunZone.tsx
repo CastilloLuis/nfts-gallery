@@ -12,13 +12,15 @@ import {
   FunZoneModalLabel,
   TotalNFTSoldContainer
 } from './FunZone.styles';
-import { ButtonContainer, FeesLabel, LoadingText } from '../../pages/Gallery/Gallery.styles';
+import { ButtonContainer, FeesLabel, LoadingText, TipButtons } from '../../pages/Gallery/Gallery.styles';
 import { generateNFT } from '../../utils/utils';
 import { INFT } from '../../entities/nft.entity';
 import { useStore } from '../../store/provider';
 import { NFT_FUN_ZONE_QTY } from '../../../nfts-quantities';
 import { PRICE_NFT_FUN_ZONE } from '../../constants/mint';
 import { getTotalFunZoneNFTSold, mintFun } from '../../store/actions/actions';
+
+import funZoneJSON from '../../nfts/funzone.json';
 
 interface FunZone {};
 
@@ -70,6 +72,12 @@ const FunZone: React.FC<FunZone> = () => {
     return totalTipAmount > etherBalance;
   }
 
+  const setMaxTip = (): void => {
+    if (!accountBalance) return;
+    const maxValue = parseFloat(accountBalance) - 0.1;
+    setTipValue(maxValue.toString());
+  }
+
   const mintFunZoneNFT = async (): Promise<void> => {
     if (!currentAccount) return alert("You haven't connected the webapp with your MetaMask wallet, click on 'Connect Wallet' button");
     const totalAmount = parseFloat(tipValue) + parseFloat(PRICE_NFT_FUN_ZONE);
@@ -93,7 +101,7 @@ const FunZone: React.FC<FunZone> = () => {
       </TotalNFTSoldContainer>
       <FunZoneContainer>
         {
-           generateNFT(NFT_FUN_ZONE_QTY).map((nft, idx) => (
+           funZoneJSON.map((nft, idx) => (
             <FunZoneItemContainer
               key={idx}
               onClick={e => handleCardClick(e.target, nft)}
@@ -125,18 +133,29 @@ const FunZone: React.FC<FunZone> = () => {
             <FunZoneInputContainer  error={isNaN(Number(tipValue)) && tipValue.length > 0}>
               <i className="fab fa-ethereum"></i>
               <FunZoneInput type="text" value={tipValue} onChange={e => setTipValue(e.target.value.replace('-', '').replace('+', ''))} />
-              <span>ETH</span>
+              <span style={{marginLeft: '5px'}}>ETH</span>
             </FunZoneInputContainer>
             <ButtonContainer>
-              <Button
-                outline
-                dark
-                label="Mint Now"
-                height="50px"
-                disabled={isNaN(Number(tipValue)) || tipValue.length === 0}
-                width="150px"
-                onClick={mintFunZoneNFT}
-              />
+              <TipButtons>
+                <Button
+                  outline
+                  dark
+                  label="Mint Now"
+                  height="50px"
+                  disabled={isNaN(Number(tipValue)) || tipValue.length === 0}
+                  width="150px"
+                  onClick={mintFunZoneNFT}
+                />
+                <div></div>
+                <Button
+                  outline
+                  dark
+                  label="Mint Max Value"
+                  height="50px"
+                  width="150px"
+                  onClick={setMaxTip}
+                />
+              </TipButtons>
               <FeesLabel>The highest tipper (cumulatively) will receive a rare dick NFT after the collection minting finishes</FeesLabel>
             </ButtonContainer>
           </Modal>

@@ -14,6 +14,8 @@ import { useStore } from '../../store/provider';
 import { mint } from '../../store/actions/actions';
 import { smartContractEventHandler } from '../../store/actions/events';
 
+import galleryJSON from '../../nfts/gallery.json';
+
 interface GalleryProps {};
 
 const Gallery: React.FC<GalleryProps> = () => {
@@ -25,7 +27,7 @@ const Gallery: React.FC<GalleryProps> = () => {
   useEffect(() => {
     if (!contractLoaded) return;
     handleMintedGalleryNFT();
-    setGallery(generateNFT(NFT_GALLERY_QTY, true));
+    setGallery(galleryJSON);
   }, [contractLoaded]);
 
   const mintGalleryNFT = async (): Promise<void> => {
