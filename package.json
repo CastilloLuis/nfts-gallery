@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "truffle-migrate": "truffle migrate --reset",
-    "dev": "npx webpack serve --config webpack.config.js --mode development"
+    "dev": "npx webpack serve --config webpack.config.js --mode development",
+    "build": "npx webpack --config webpack.config.js --mode production",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Luis Castillo",
@@ -40,6 +42,7 @@
     "@types/styled-components": "^5.1.9",
     "add": "^2.0.6",
     "babel-polyfill": "^6.26.0",
+    "express": "^4.17.1",
     "react-router-dom": "^5.2.0"
   }
 }
